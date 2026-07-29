@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling Paper Reviewer"
+  short_description: "Multi-perspective contest paper review and re-review"
+  default_prompt: "Use $academic-paper-reviewer to review this modeling paper before Gate G6."

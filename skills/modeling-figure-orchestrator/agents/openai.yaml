@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling Figure Orchestrator"
+  short_description: "Route and quality-check modeling figures across tools"
+  default_prompt: "Use $modeling-figure-orchestrator to plan, render, and inspect all figures for this modeling project."

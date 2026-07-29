@@ -1,0 +1,25 @@
+{
+  "name": "mathmodeling-skills",
+  "version": "0.1.0+codex.20260719202004",
+  "description": "Unified mathematical modeling workflow with verified research, coding, visualization, evidence-bound writing, contest review, and audit skills.",
+  "author": {
+    "name": "FIREBAT"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "MathModeling Skills",
+    "shortDescription": "A unified toolkit for mathematical modeling competitions.",
+    "longDescription": "Combines end-to-end modeling workflows with specialist skills for verified literature research, method selection, reproducible coding, scientific figures, evidence-bound contest paper writing, multi-perspective review, and final verification.",
+    "developerName": "FIREBAT",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Start a complete mathematical modeling workflow for this problem.",
+      "Analyze this modeling problem and propose candidate methods.",
+      "Strengthen and review my modeling paper without changing frozen results."
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling Deep Research"
+  short_description: "Verified literature research for modeling methods"
+  default_prompt: "Use $deep-research to build a verified method evidence matrix for this modeling problem."

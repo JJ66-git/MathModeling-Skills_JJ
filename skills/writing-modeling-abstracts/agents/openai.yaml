@@ -1,0 +1,4 @@
+interface:
+  display_name: "数学建模摘要写作"
+  short_description: "Draft and audit evidence-bound modeling abstracts"
+  default_prompt: "Use $writing-modeling-abstracts to draft and audit a contest-ready modeling abstract from frozen results."

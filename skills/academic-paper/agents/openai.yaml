@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling Academic Paper"
+  short_description: "Evidence-bound architecture and whole-paper writing"
+  default_prompt: "Use $academic-paper to strengthen this modeling paper without changing frozen results."

@@ -1,0 +1,16 @@
+# Python and local runtime artifacts
+__pycache__/
+*.py[cod]
+*.log
+
+# Generated project outputs
+outputs/
+tmp/
+paper/figures/render_check.log
+
+# Local credentials and machine-specific files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
