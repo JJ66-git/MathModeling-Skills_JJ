@@ -65,12 +65,17 @@ The visualization layer keeps correctness ahead of decoration:
 
 ## Installation in Codex
 
-Install the plugin from the personal marketplace:
+For the complete local Codex plugin, clone this repository into your personal plugin source and
+install it from your local marketplace. For the skill bundle alone, the standard skills installer
+can read this repository directly:
 
 ```bash
-codex plugin add mathmodeling-skills@personal
+git clone https://github.com/JJ66-git/MathModeling-Skills_JJ.git
+npx skills add JJ66-git/MathModeling-Skills_JJ --all
 ```
 
+If you already maintain a Codex personal marketplace, point its local plugin entry at the cloned
+directory containing `.codex-plugin/plugin.json`, then install `mathmodeling-skills@personal`.
 After installation, start a new Codex task so the new plugin version is loaded.
 
 ## Repository layout
