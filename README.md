@@ -45,6 +45,16 @@ flowchart LR
 
 `workflow-orchestrator` 是统一调度入口。图表路径与论文路径刻意分离，避免“好看但无证据”的图直接进入结论。
 
+### Editable Draw.io workflow / 可编辑 Draw.io 工作流图
+
+This workflow preview was exported locally with Draw.io Desktop from the editable source below. It makes the plugin's central distinction visible: computation, figures, writing, and delivery are connected by evidence and independent audit, while modeler approval remains a real decision gate.
+
+下图由本机 Draw.io Desktop 从可编辑源文件导出，直观展示本插件的核心差异：计算、图表、写作和交付通过证据与独立验收连接，而建模者确认始终是不可跳过的决策关卡。
+
+![MathModeling Skills_JJ editable Draw.io workflow](assets/readme/mathmodeling-workflow.png)
+
+[Open the editable Draw.io source / 打开可编辑 Draw.io 源文件](assets/readme/mathmodeling-workflow.drawio)
+
 ## 48 skills, organized for contest work / 48 个技能，覆盖竞赛全链路
 
 | Stage / 阶段 | English capability | 中文能力 |

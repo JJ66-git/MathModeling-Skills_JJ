@@ -1,0 +1,81 @@
+<mxfile host="app.diagrams.net" modified="2026-08-30T12:55:00.000Z" agent="MathModeling Skills_JJ" version="28.2.8" type="device">
+  <diagram id="mathmodeling-workflow" name="MathModeling Workflow">
+    <mxGraphModel dx="1400" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="MathModeling Skills_JJ: Verification-First Workflow&lt;br&gt;数学建模：验证优先的端到端工作流" style="text;html=1;align=left;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#17212B;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1040" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="Traceable artifacts, human-owned decisions, reproducible evidence / 产物可追溯、决策由人把关、证据可复现" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#536273;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="42" y="118" width="1120" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="input" value="Problem &amp; data&lt;br&gt;题目与附件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F1FA;strokeColor=#3E78A8;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="130" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="parse" value="Parse &amp; classify&lt;br&gt;解析与分类" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F1FA;strokeColor=#3E78A8;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="330" width="130" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="assumptions" value="Assumptions &amp; symbols&lt;br&gt;假设与符号" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5F2;strokeColor=#277D70;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="330" width="130" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="methods" value="Candidate methods&lt;br&gt;候选方法比较" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5F2;strokeColor=#277D70;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="330" width="140" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="decision" value="Modeler&lt;br&gt;decision?&lt;br&gt;人工确认？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF5D9;strokeColor=#A97816;fontColor=#17212B;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="318" width="92" height="88" as="geometry"/>
+        </mxCell>
+        <mxCell id="compute" value="Reproducible code&lt;br&gt;可复现计算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1ECF8;strokeColor=#7658A5;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="330" width="145" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="figures" value="Robustness &amp; figures&lt;br&gt;稳健性与图表" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1ECF8;strokeColor=#7658A5;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="330" width="145" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="paper" value="Evidence-bound paper&lt;br&gt;证据约束论文" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAE7;strokeColor=#B85C4A;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="490" width="145" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="audit" value="Independent audit&lt;br&gt;独立验收" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAE7;strokeColor=#B85C4A;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="490" width="140" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="deliver" value="Contest-ready deliverable&lt;br&gt;可提交成果" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF4EA;strokeColor=#4C8A57;fontColor=#17212B;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="330" width="140" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="input" target="parse">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="parse" target="assumptions">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="assumptions" target="methods">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="methods" target="decision">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="Yes / 通过" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;fontSize=12;fontColor=#17212B;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="decision" target="compute">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="compute" target="figures">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="figures" target="paper">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="paper" target="audit">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#465466;strokeWidth=2;" edge="1" parent="1" source="audit" target="deliver">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="Revise / 返工" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#A97816;strokeWidth=2;fontSize=13;fontColor=#17212B;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="decision" target="methods">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="746" y="230"/>
+              <mxPoint x="590" y="230"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
