@@ -10,6 +10,11 @@ A guide for producing publication-quality figures for mathematical modeling cont
 
 Adapted from the [nature-figure](https://github.com/Yuan1z0825/nature-skills) skill's philosophy: the chart serves the scientific logic first; aesthetic polish is subordinate to making the conclusion clear, defensible, and reviewable.
 
+For publication-targeted Matplotlib grouped bars, trends, heatmaps, radar plots, or multi-panel
+comparisons that benefit from a concrete precedent, read
+[`references/figures4papers.md`](references/figures4papers.md) after freezing the figure contract.
+Treat it as an optional style/layout reference, never as a data source or runtime dependency.
+
 ## First move: figure contract before plotting
 
 Before any code, define the contract:
@@ -576,6 +581,7 @@ Use when:
 | [references/chart-patterns.md](references/chart-patterns.md) | Extended chart pattern gallery with full code examples |
 | [references/color-systems.md](references/color-systems.md) | Detailed color theory for math modeling figures |
 | [references/layout-guide.md](references/layout-guide.md) | Multi-panel layout strategies and common patterns |
+| [references/figures4papers.md](references/figures4papers.md) | Optional external precedents for publication-targeted Matplotlib figures |
 
 ## Rules
 

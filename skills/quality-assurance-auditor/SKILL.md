@@ -99,6 +99,7 @@ Use or request:
      7. Robustness report exists (`robustness/Qx/qx_robustness_report.md`) or a justified exception.
      8. Figure-table plan exists (`methods/Qx/qx_figure_table_plan.md`).
      9. If figures are promoted to the paper, `paper/figures/figure_manifest.json` and `figure_qa_log.md` exist and every promoted Type 3/4 figure has `qa_status: PASS`.
+     10. Every required Draw.io figure has a verified editable source and final export; no required figure is `PLACEHOLDER`, `AWAITING_SAVE`, or `UNVERIFIED_MCP_FALLBACK`, and `paper/issues/issue_register.md` has no `OPEN`/`BLOCKING` figure issue.
    - Mark any missing link in this chain as a blocking issue.
 
 3. Check the three critical rules.
@@ -109,6 +110,21 @@ Use or request:
 4. Check artifact lineage.
    - Trace each major paper claim back to problem parse, method explanation, data, code, result, figure, or robustness artifact.
    - Mark claims without artifacts as unsupported.
+
+## Evidence Closure Gate
+
+Before approving final assembly, QA MUST verify all of the following:
+
+1. Every top-level and hard subquestion requirement has a row in the problem requirement traceability matrix, including any “附件数据 only” restriction, with a verbatim problem excerpt and page number.
+2. Every reported core parameter has an identifiability statement: information source, identification mechanism, confounding assessment, and a rank/condition/profile/sensitivity or justified N/A check.
+3. Every external formula has a formula-provenance record whose material, range, coefficients, citation, implementation, and problem compliance agree.
+4. Every major numerical claim has one canonical frozen result source, and the same value propagates to tables, figures, abstract, body, and sensitivity analysis.
+5. Paper algorithm descriptions match actual code paths and execution evidence; unimplemented or uncalled QR/SVD switching, global search, refitting, or robustness claims are not allowed. Global-optimum claims require proof, exact-solver comparison, or multi-start/multi-seed evidence.
+6. Bootstrap, cross-validation, and hypothesis tests document their data mechanism, null/alternative, statistic, leakage control, estimator/loss function, and whether all dependent parameters are refit. Any estimator switch additionally has a pre-decision record, comparison, impact analysis, and boundary.
+7. Strong causal, mechanistic, global-optimum, or independent-validation claims are downgraded when alternative explanations remain.
+8. The final PDF contains body, AI tool-use statement before references, references, appendix, complete code, and complete raw data. Verify `paper/final_delivery_manifest.json` against file hashes/byte sizes and PDF text/page markers. A body page-count target must never be met by removing these materials.
+
+Any failed item is a **BLOCKING** issue, not a minor style note.
 
 5. Check model consistency.
    - Verify models match the classified problem types.
@@ -129,6 +145,9 @@ Use or request:
    - Verify every figure or table has a source artifact.
    - Verify the figure manifest backend, source paths, target width, and QA status match the exported files.
    - Verify `figure_qa_log.md` records target-width inspection and no unresolved overlap, clipping, or font-floor failure; final scaled text is >=7.5 pt (六号).
+   - Verify every complex Draw.io figure used `using-drawio-mcp` when its complexity predicate was true, its visible labels match the paper language, and its editable source is verified on disk.
+   - Treat Mermaid/TikZ fallback images as draft-only placeholders. Any `PLACEHOLDER`, `AWAITING_SAVE`, or `UNVERIFIED_MCP_FALLBACK` state is BLOCKING regardless of whether the image renders.
+   - Inspect `paper/issues/issue_register.md`; route an unresolved Draw.io MCP issue to `using-drawio-mcp` through `4drawio`.
    - Verify single-column figures fill the text width, spanning figures stay inside the text block,
      every paper figure is >=5 cm high, and raster effective resolution is recorded and visibly adequate.
    - Verify the four required evidence families (model principle, key comparison, sensitivity, and
@@ -152,6 +171,8 @@ Use or request:
    - Verify robustness claims do not exceed completed checks.
    - Verify conclusions do not exceed evidence.
    - Flag any claim that cannot be traced to an artifact.
+
+   - Treat the following as blocking issue codes when present: `hard_requirement_unmet`, `unidentifiable_parameter_claimed_as_estimated`, `formula_provenance_mismatch`, `paper_code_algorithm_drift`, `statistical_estimator_mismatch`, `unsupported_strong_claim`, `result_source_conflict`, and `final_pdf_incomplete`.
 
 9. **Produce a QA report — MANDATORY substantive file on disk.**
    - Save to `paper/qa_report.md`.
@@ -321,6 +342,9 @@ Containing:
 - [ ] Every figure in the paper exists on disk
 - [ ] No Type 1 (诊断图) figures in the paper
 - [ ] Every robustness claim has robustness evidence
+- [ ] Requirement traceability, parameter identifiability, formula provenance, result provenance, and paper-code-figure consistency ledgers pass
+- [ ] External formulas comply with data-use restrictions and match their cited sources
+- [ ] Main and validation estimators/loss functions are aligned or differences are explicitly justified
 
 ## Paper quality
 - [ ] Every conclusion maps to a subquestion
@@ -329,6 +353,8 @@ Containing:
 - [ ] Code outputs match paper claims
 - [ ] Raw data is preserved
 - [ ] Limitations are stated
+- [ ] Final PDF contains AI tool-use statement, references, appendix, complete code, and complete raw data
+- [ ] If no table of contents is requested, the compiled PDF has no unintended contents page
 
 ## Anti-fabrication
 - [ ] No fabricated data, references, results, figures, or experiments
@@ -357,6 +383,7 @@ Containing:
 Before approving final assembly, verify:
 
 - `blocking_issues` is empty.
+- No required figure has an `OPEN`/`BLOCKING` issue or a non-promotable Draw.io state.
 - `workflow_completeness_check` passes for all subquestions (8/8 checks per subquestion, or justified exceptions).
 - `three_critical_rules_check` passes for all subquestions.
 - `unsupported_claims` is empty or explicitly removed from final text.

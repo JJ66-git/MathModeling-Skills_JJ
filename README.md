@@ -3,7 +3,7 @@
 > A verification-first toolkit for mathematical modeling competitions: from problem parsing and method selection to reproducible computation, publication-ready figures, evidence-bound writing, and final audit.
 
 [![Plugin](https://img.shields.io/badge/Codex-plugin-2f6feb)](https://github.com/JJ66-git/MathModeling-Skills_JJ)
-[![Skills](https://img.shields.io/badge/skills-47-16a34a)](./skills)
+[![Skills](https://img.shields.io/badge/skills-48-16a34a)](./skills)
 [![License](https://img.shields.io/badge/license-MIT-22c55e)](./LICENSE)
 
 ## Why this exists
@@ -82,7 +82,7 @@ After installation, start a new Codex task so the new plugin version is loaded.
 
 ```text
 .codex-plugin/plugin.json   # Codex plugin manifest
-skills/                     # 47 modeling, coding, visualization, writing, and audit skills
+skills/                     # 48 modeling, coding, visualization, writing, and audit skills
 automcm-pro-runtime/        # Optional AutoMCM runtime helpers
 SOURCES.md                  # Provenance and integration notes
 ```

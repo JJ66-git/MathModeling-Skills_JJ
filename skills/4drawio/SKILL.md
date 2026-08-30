@@ -77,6 +77,29 @@ DRAWIO PLAN CHECKLIST:
 - 相关性热力图
 - 分布图和箱线图
 
+### Complex Draw.io MCP routing (run before Step 3)
+
+Keep this skill as the owner of the non-data-diagram stage and `reports/DRAWIO_REPORT.md`. Route
+the actual creation or edit to `using-drawio-mcp` and set `drawio_mcp_required: true` when the
+figure has more than eight nodes, at least two decisions or a feedback loop, at least two lanes or
+nested groups, a multi-layer architecture, specialized editable geometry, any existing `.drawio`
+edit, or an explicit Draw.io MCP requirement.
+
+Match all visible labels to the paper language. Chinese figures use Chinese labels and `是`/`否`;
+English figures use English labels and `Yes`/`No`. For existing files, require the page-safe
+`list_pages -> get_page -> set_page` workflow owned by `using-drawio-mcp`.
+
+When MCP is unavailable or still fails visual QA after three attempts, record:
+
+- legal `.drawio` and XML fallbacks marked `UNVERIFIED_MCP_FALLBACK`;
+- a rendered Mermaid or TikZ placeholder plus its source;
+- `paper/issues/drawio-mcp/<figure_id>/issue.md` and an `OPEN` or `BLOCKING` entry in
+  `paper/issues/issue_register.md`;
+- the same state, paths, attempts, and recovery action in `reports/DRAWIO_REPORT.md`.
+
+`PLACEHOLDER`, `AWAITING_SAVE`, and `UNVERIFIED_MCP_FALLBACK` are drafting states only. Never
+report them as final, and never allow them through G5 or G6.
+
 ### Step 3: 生成 DrawIO 源文件
 
 每张图一个 `.drawio` 文件，放在 `figures/`。

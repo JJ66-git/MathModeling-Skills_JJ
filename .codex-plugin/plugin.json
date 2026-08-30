@@ -1,7 +1,7 @@
 {
   "name": "mathmodeling-skills",
-  "version": "0.1.0+codex.20260719202004",
-  "description": "Unified mathematical modeling workflow with verified research, coding, visualization, evidence-bound writing, contest review, and audit skills.",
+  "version": "0.1.0+codex.20260830123039",
+  "description": "Unified mathematical modeling workflow with verified research, coding, Draw.io MCP fallback, visualization, evidence-bound writing, contest review, and audit skills.",
   "author": {
     "name": "FIREBAT"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "MathModeling Skills",
     "shortDescription": "A unified toolkit for mathematical modeling competitions.",
-    "longDescription": "Combines end-to-end modeling workflows with specialist skills for verified literature research, method selection, reproducible coding, scientific figures, evidence-bound contest paper writing, multi-perspective review, and final verification.",
+    "longDescription": "Combines end-to-end modeling workflows with specialist skills for verified literature research, method selection, reproducible coding, scientific figures, standardized complex Draw.io MCP diagrams and fallback tracking, evidence-bound contest paper writing, multi-perspective review, and final verification.",
     "developerName": "FIREBAT",
     "category": "Productivity",
     "capabilities": [

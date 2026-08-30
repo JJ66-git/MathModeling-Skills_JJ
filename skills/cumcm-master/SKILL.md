@@ -103,6 +103,18 @@ python scripts/agent_memory_manager.py init \
 - 拟使用的算法和工具包
 - 模型假设初稿
 
+### 2.4 证据闭环初始化（强制）
+
+在开始建模前建立并持续更新以下台账：
+
+- `planning/problem_requirement_traceability.md`：题目要求、原文位置、模型、代码、结果、论文段落和状态；
+- `methods/parameter_identifiability.md`：核心参数的信息来源、识别机制、混淆关系和可辨识结论；
+- `methods/formula_provenance.md`：每个外部公式的系数、适用范围、真实来源、正文引用、代码位置和题目合规性；
+- `results/result_provenance.md`：冻结参数、运行命令、结果 JSON/CSV、图表和论文数字的来源链；
+- `paper/paper_code_figure_consistency.md`：正文算法、代码路径、图表和数值的一致性记录。
+
+任何“只能使用附件数据”等题目限定都标记为 **BLOCKING** 约束，并保留原题页码和原文摘录；台账出现未解释断点时不得进入论文写作。
+
 ---
 
 ## 【第三步】Phase 2 — 代码实现与验证（高度迭代 ReAct 循环）
@@ -133,6 +145,11 @@ THINK → WRITE_CODE → RUN → OBSERVE → REFLECT → (修复或继续)
 - 每个函数必须有中文注释说明数学含义
 - 图表必须调用 matplotlib 并保存到 `CUMCM_Workspace/latex/images/`
 - 数值结果必须打印，便于观察
+- 正文拟声称的每个算法步骤（如 QR/SVD 切换、全局搜索、稳健损失、参数重估）必须能映射到实际函数和执行路径；未实现的步骤不得写入正文。
+- 关键分支必须有运行日志、测试覆盖或结果证据；只定义未调用的函数不算实现。宣称全局最优时必须提供证明、精确求解对照或多起点/多随机种子稳定性结果。
+- 主模型、Bootstrap、交叉验证和零假设检验必须记录实际估计器、损失函数和每次是否重估全部关键参数，禁止验证阶段无说明地切换模型。
+- 若验证必须切换估计器，需记录预先决策、对照结果、偏差/区间影响和适用边界。
+- 不可辨识参数必须在结果中报告不可辨识性或可识别组合，不能通过吸收到包络、尺度或其他自由参数后冒充独立估计。
 
 #### RUN（运行）
 ```bash
@@ -236,6 +253,8 @@ cp templates/latex_template.tex CUMCM_Workspace/latex/main.tex
 - 插入 `src/` 中每个关键脚本的完整代码
 - 使用 `listings` 宏包，Python 语法高亮
 
+正文末尾、参考文献之前必须设置“AI 工具使用声明”（不单独成册）。如用户要求不设目录，必须在编译后的 PDF 中核验确实没有目录页。
+
 ### 4.3 写作自我反思清单
 
 写完每个章节后，必须自问：
@@ -294,6 +313,15 @@ cd CUMCM_Workspace/latex && xelatex -interaction=nonstopmode main.tex 2>&1 | tai
 cp CUMCM_Workspace/latex/main.pdf CUMCM_Workspace/output/final_paper.pdf
 python scripts/agent_memory_manager.py complete
 ```
+
+最终检查必须验证以下完整交付链：
+
+- PDF 包含正文、AI 工具使用声明、参考文献、附录、完整代码和完整原始数据；
+- 正文页数要求（如 25—28 页）仅约束正文，不得删除附录、代码或原始数据来凑页数；
+- 将源文件、代码、结果和原始数据复制到独立目录后重新编译，确认交叉引用、图片、附录和代码均可用；
+- 生成 `paper/final_delivery_manifest.json`，列出 PDF、tex、代码和原始数据的路径、字节数/哈希及 PDF 文本中正文、AI 声明、参考文献、附录和代码的页码或关键词；QA 必须核对该清单；
+- 题目要求追踪、参数可辨识性、公式来源、结果溯源和正文—代码—图表一致性五类证据台账均已通过；
+- 任一硬约束未满足、核心参数不可辨识却被声称已估计、引用公式与实现不一致、正文算法漂移、统计估计器不一致、数值不一致或 PDF 不完整，均为 **BLOCKING**，必须回退修复。
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: 5writing
-description: "数学建模竞赛论文撰写阶段，支持 Typst 和 LaTeX 双引擎。根据 ANALYSIS_MODELING_REPORT.md、RESULTS_REPORT.md 和 figures/*.pdf 选择比赛模板、排版引擎、组织章节，并在论文正文中按章节直接插入图表。"
+description: "数学建模竞赛论文撰写阶段，支持 Typst 和 LaTeX 双引擎。根据 ANALYSIS_MODELING_REPORT.md、RESULTS_REPORT.md 和 figures/*.pdf 选择比赛模板、排版引擎、组织章节、插入图表，并在适用的全国大学生数学建模竞赛论文中生成证据驱动的 AI 工具使用声明与使用详情。"
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch
 ---
 
@@ -125,6 +125,14 @@ ls "$SKILL_DIR/templates/zh/<竞赛>-latex/main.tex" 2>/dev/null && echo "OK" ||
 
 
 ### 步骤 3：构建图表规划
+
+Before inserting any figure, read `paper/figures/figure_manifest.json`,
+`paper/figures/figure_qa_log.md`, and `paper/issues/issue_register.md` when present. Insert a
+required final figure only when its editable source exists, its visual QA is `PASS`, and it has no
+`OPEN` or `BLOCKING` issue. A rendered Mermaid or TikZ image may occupy the intended slot during
+drafting, but mark the paper build as blocked while its manifest state is `PLACEHOLDER`,
+`AWAITING_SAVE`, or `UNVERIFIED_MCP_FALLBACK`. Do not describe a placeholder as final and do not
+allow G5/G6 to pass.
 
 在写正文各节之前，根据 `figures/*.pdf`、`reports/RESULTS_REPORT.md`，以及 `reports/DRAWIO_REPORT.md`（如果存在）构建图表规划：
 
@@ -320,7 +328,21 @@ A_code.typ
 
 **正文写作应使用连贯的学术段落。避免在最终论文中出现工作流内部名称，如 `reports/`、`figures/` 或 `CLAUDE.md`。**
 
-### 步骤 5：参考文献
+### 步骤 5：全国大学生数学建模竞赛 AI 工具使用声明（2026 年试行）
+
+当比赛为全国大学生数学建模竞赛（CUMCM），且适用 2026 年 9 月 1 日起试行的《人工智能工具使用规定》时，必须完整读取并执行 `references/cumcm-ai-tool-disclosure-2026.md`。
+
+在生成声明前，先核对团队记录、AI 交互记录、版本历史、终端与测试记录，建立逐环节事实表。不得仅根据用户希望的措辞推断实际使用范围，也不得把建模、算法设计、代码生成、数据分析、作图、资料检索或论文写作伪装成“代码调试”。
+
+- 若证据证明竞赛全过程未使用任何 AI 工具，使用规定中的“未使用”声明，不生成虚构的使用详情。
+- 若证据证明 AI 仅用于代码调试，使用“主要用于代码调试”的声明，并生成 `supporting-materials/AI 工具使用详情.pdf`。
+- 若 AI 用于代码调试和前期框架辅助，而模型、程序、结果、图表与论文均由队员后续实质性重构和核验，使用“主要用于代码调试及前期框架辅助”的声明，并在详情中逐项写明 AI 提供的初始框架、人工重构内容和验证证据。
+- 若 AI 还用于其他环节，必须按实际用途完整披露；不得套用“仅代码调试”样稿。
+- 若记录不足以确认真实使用范围，将声明和支撑材料标记为 `BLOCKED`，列出待团队确认的事实，不得自行补写工具、版本、提示词或核验结果。
+
+“AI 工具使用声明”必须放在论文参考文献之前。声明正文使用官方规定的原句，不得改写为同义表述。若声明使用了 AI，详情 PDF 必须包含工具名称及版本或型号、具体用途和环节、主要提示方式与使用过程、典型交互（如提供），以及 AI 输出的采纳、人工修改和核验情况。
+
+### 步骤 6：参考文献
 
 只使用真实存在的参考文献。文件名按引擎选择：Typst 用 `paper/references.typ`，LaTeX 用 `paper/references.tex`。
 
@@ -347,11 +369,33 @@ A_code.typ
 
 正文引用用 `\cite{ref1}` 或 `\cite{ref1,ref2}`。
 
-### 步骤 6：最后撰写摘要或总结
+### 步骤 7：最后撰写摘要或总结
 
 在所有章节完成后撰写中文摘要或英文 Summary Sheet。必须包含每个子问题的方法和精确的数值结果。
 
 调用 `writing-modeling-abstracts`。单段摘要保留 3-5 组语义加粗，合计覆盖核心方法、关键模型、核心指标、结论数值和末尾关键词；加粗只包围关键词本身，不得包围完整句子。
+
+### 步骤 8：生成支撑材料 ZIP 和论文附录清单
+
+当竞赛为全国大学生数学建模竞赛或其广东赛区时，完整读取并执行 `references/cumcm-supporting-materials-package.md`。参赛论文 PDF 不得放进压缩包；支撑材料必须作为单独文件提交。
+
+1. 将所有必要支撑材料整理到一个匿名目录中，包括全部可运行源程序、自主查阅的数据资料（赛题原始数据除外）、必要的大篇幅中间结果，以及使用 AI 时的 `AI 工具使用详情.pdf`。
+2. 运行 `scripts/package_supporting_materials.ps1`。脚本使用 7-Zip 生成单个 ZIP，在压缩前创建 `支撑材料文件清单.md`，清单记录每个材料文件的相对路径、字节数和 SHA-256，并将清单一并放入 ZIP。
+3. 把清单中的材料文件列表同步写入论文附录。论文附录与 ZIP 内清单必须逐项一致；源程序既要进入论文附录，也要进入 ZIP。
+4. ZIP 必须小于 20 MiB，并通过 `7z t` 完整性测试。达到或超过上限、清单不一致、存在身份信息或包含承诺书/编号专用页时，标记为 `BLOCKED`，不得提交。
+5. 最终关闭论文 PDF 和 ZIP，再通过比赛客户端生成并提交各自的 MD5。生成 MD5 后不得重新打开保存文件；若文件发生改变，必须在截止时间前重新生成并提交 MD5。
+
+打包脚本返回成功只证明 ZIP 创建、清单生成、大小门禁和 `7z t` 通过，不代表支撑材料已经可以提交。必须继续执行 `6verity` 的 Step 9，完成解压复现、清单与论文附录比对以及匿名性和元数据检查。
+
+Windows 调用示例：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$SKILL_DIR\scripts\package_supporting_materials.ps1" `
+  -SourceDirectory ".\supporting-materials" `
+  -OutputZip ".\submission\supporting-materials.zip"
+```
+
+若确实没有支撑材料，不生成空 ZIP，并在论文附录中写明“本论文没有支撑材料”。
 
 ## LaTeX 写作要点
 

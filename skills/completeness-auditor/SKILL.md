@@ -49,6 +49,7 @@ This is the canonical list of files that must exist for "completion" to be real.
 | `solution-package-builder` | `results/Qx/reports/qx_solution_package_for_writer.md` + `results/Qx/reports/frozen_numbers.json` | (structural) |
 | `figure-table-planner` | `methods/Qx/qx_figure_table_plan.md` | (structural) |
 | `modeling-figure-orchestrator` | `paper/figures/figure_manifest.json` + `paper/figures/figure_qa_log.md` | (structural) |
+| `using-drawio-mcp` | verified editable source + final export, or `paper/issues/drawio-mcp/<figure_id>/issue.md` while blocked | (structural; unresolved state blocks G5/G6) |
 | `method-selector` | `methods/Qx/qx_method_candidates.md` + `methods/Qx/qx_method_iteration_log.md` | (structural) |
 | `modeler-decision-logger` | `methods/Qx/qx_decision_log.md` | (decision-record check — see below) |
 
@@ -86,6 +87,14 @@ The seven B-layer skills don't emit a front-matter decision artifact; instead th
 | `[AI-DRAFT — modeler must confirm: …]` / `[MODELER INPUT NEEDED: …]` | figure-table-planner Type-3 `core_claim`; math-figure-generator figure `core_claim` (blocks promotion to `paper/figures/`) | G5 |
 
 The sweep is a plain substring search for `[MODELER INPUT NEEDED` and `[AI-DRAFT —` in the finalized artifacts — same mechanism as the `<<<HUMAN>>>` sentinel check, no NLP. Report each survivor with file:line and the gate it blocks.
+
+### Draw.io MCP fallback closure
+
+Inspect `paper/issues/issue_register.md` and every required Draw.io manifest record. Report a
+BLOCKING completeness gap when a required final figure has no editable source, no final export, no
+visual QA `PASS`, an `OPEN`/`BLOCKING` issue, or state `PLACEHOLDER`, `AWAITING_SAVE`, or
+`UNVERIFIED_MCP_FALLBACK`. A placeholder image proves only that draft layout can continue; it does
+not satisfy the producer artifact.
 
 ## Global (project-wide)
 

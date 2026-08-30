@@ -176,18 +176,26 @@ This is the results→paper boundary. Most "论文里数字与最新 results 错
 ## Gate G5: PAPER_SECTION_READY
 - **enter_condition**: G4 passed; `paper/sections/qx.tex` exists.
 - **pass_criteria**:
+  - Required non-data figures are routed by `modeling-figure-orchestrator`; any figure whose contract sets `drawio_mcp_required: true` is executed through `using-drawio-mcp` and reported through `4drawio`.
+  - Every required final figure has an editable source on disk, a final export, a manifest entry, visual QA `PASS`, labels matching the paper language, and no `OPEN` or `BLOCKING` row in `paper/issues/issue_register.md`.
+  - Figure states `PLACEHOLDER`, `AWAITING_SAVE`, and `UNVERIFIED_MCP_FALLBACK` are non-promotable and fail G5 even when a rendered image occupies the paper slot.
   - Mechanical: section meets the word-count floor (per section type); every numerical result has ≥ 3 discussion dimensions covered; every figure exists on disk and passed `modeling-figure-orchestrator`'s figure QA contract (including `math-figure-generator` render-check where applicable).
   - Human (B-layer): the **physical-meaning** discussion dimension is human-authored — its `[MODELER INPUT NEEDED]` sentinel has been replaced; a surviving sentinel means that dimension does NOT count toward the ≥3 floor. The three paper seeds (`key_result_claim`, `contribution_claim`, `why_this_method`) are filled (no surviving sentinel), and `why_this_method` carries a `<!-- from Qx-D0n -->` provenance marker tracing to the decision log. Every Type 3 figure's `core_claim` is human-confirmed (no surviving sentinel).
 - **fail_fallback**: Missing dimensions / under floor → `paper-section-writer`. Surviving sentinel in physical-meaning or a paper seed → route back to the modeler. Figures failing visual QA or with an unconfirmed `core_claim` → `modeling-figure-orchestrator` (route) / the selected renderer (repair) / `figure-table-planner` (claim).
+
+Complex Draw.io figures with a missing editable source, failed visual QA, non-promotable state, or open issue route to `using-drawio-mcp` through `4drawio`.
 
 ## Gate G6: AUDIT_LAYER_PASSED  (the final gate before assembly)
 This is the independent-audit gate. No single skill's "完成" claim can bypass it.
 - **enter_condition**: G5 passed for all Qx; paper sections drafted; references managed.
 - **pass_criteria** (all three independent audits must PASS):
+  - `paper/issues/issue_register.md` has no `OPEN` or `BLOCKING` issue for a required final figure, and no figure manifest entry is `PLACEHOLDER`, `AWAITING_SAVE`, or `UNVERIFIED_MCP_FALLBACK`.
   - `paper/audits/cross_media_consistency_audit.md` — verdict PASSED.
   - `paper/audits/completeness_audit.md` — verdict PASSED.
   - `paper/qa_report.md` — verdict PASSED.
 - **fail_fallback**: Route to whichever auditor failed. Never approve `final_assembly_allowed=true` on partial audit. The three auditors are orthogonal — passing one does not imply the others.
+
+Unresolved Draw.io MCP figure issues route to `using-drawio-mcp` through `4drawio` and keep `final_assembly_allowed=false`.
 
 ## Gate dependency graph
 

@@ -12,7 +12,7 @@ model truth first, then add restrained, evidence-driven human-crafted differenti
 figure to Python, MATLAB MCP, DrawIO, or image generation according to what the figure must prove.
 
 This skill owns routing, coverage, manifests, and final visual QA. It does not replace
-`figure-table-planner`, `math-figure-generator`, `4drawio`, `draw-image`, or
+`figure-table-planner`, `math-figure-generator`, `4drawio`, `using-drawio-mcp`, `draw-image`, or
 `mathmodel-figure-templates`.
 
 ## Workflow Position
@@ -59,9 +59,9 @@ exist.
 
 | Visual need | Primary route | Escalation or boundary |
 |---|---|---|
-| Data chart from model output | `math-figure-generator` with Python/matplotlib/pandas | Use MATLAB MCP only when capability or project-language criteria below apply |
+| Data chart from model output | `math-figure-generator` with Python/matplotlib/pandas | For publication-targeted grouped bars, trends, heatmaps, radar plots, or multi-panel comparisons, optionally consult `math-figure-generator/references/figures4papers.md`; use MATLAB MCP only when capability or project-language criteria below apply |
 | Known advanced template | `mathmodel-figure-templates` | Replace simulated template data with verified project data before paper use |
-| Exact logical flowchart or architecture | `4drawio` | Prefer editable geometry and exact labels over generated pixels |
+| Exact logical flowchart or architecture | `4drawio` | Route complex or existing-file Draw.io work to `using-drawio-mcp`; prefer editable geometry and exact labels over generated pixels |
 | Conceptual illustration without numeric evidence | `draw-image` | Never use it for measured values, fitted curves, rankings, or uncertainty |
 | Figure plan or claim mapping | `figure-table-planner` | Return there if type or claim is unconfirmed |
 
@@ -77,6 +77,10 @@ least one observable condition holds:
 
 Do not switch to MATLAB merely to make an ordinary line, bar, scatter, box, heatmap, or histogram
 look different. Record the escalation reason in the manifest.
+
+Figures4Papers is a non-blocking style and layout reference, not a backend, data source, or evidence
+source. The figure contract and local QA rules remain authoritative. Keep Draw.io diagrams,
+interactive plots, GIS, dominant 3D work, and upstream asset copying outside that reference route.
 
 ### 3. Freeze the figure contract
 
@@ -115,8 +119,13 @@ Use `mcp__matlab__evaluate_matlab_code` only for small, non-destructive probes. 
 required toolbox is unavailable, report the blocker or route back to Python; do not claim MATLAB
 execution occurred.
 
-For logical diagrams, use `4drawio` and preserve `.drawio` plus exported PDF. Use `draw-image` only
-for non-numeric conceptual illustration where exact text geometry is not load-bearing.
+For logical diagrams, use `4drawio` and preserve `.drawio` plus exported PDF. Set
+`drawio_mcp_required: true` and invoke `using-drawio-mcp` when there are more than eight nodes,
+at least two decisions or a feedback loop, at least two lanes or nested groups, a multi-layer
+architecture, specialized editable geometry, any existing-file edit, or an explicit Draw.io MCP
+request. Lock visible labels to the paper language: Chinese uses Chinese plus `是`/`否`; English
+uses English plus `Yes`/`No`. Use `draw-image` only for non-numeric conceptual illustration
+where exact text geometry is not load-bearing.
 
 ### 5. Verify numerical and logical correctness
 
@@ -192,7 +201,10 @@ Write `paper/figures/figure_manifest.json` with one record per figure:
   "source_artifacts": ["results/Q1/reports/frozen_numbers.json"],
   "plotted_fields": ["parameter", "objective_value"],
   "transformations": ["none"],
-  "backend": "python|matlab-mcp|drawio|imagegen",
+  "backend": "python|matlab-mcp|drawio|drawio-mcp|mermaid-placeholder|tikz-placeholder|imagegen",
+  "artifact_state": "FINAL|PLACEHOLDER|AWAITING_SAVE|UNVERIFIED_MCP_FALLBACK",
+  "editable_source": "paper/figures/editable/fig_q1_2.drawio",
+  "issue_folder": null,
   "generator": "code/Q1/figures/make_fig_q1_2.py",
   "outputs": ["paper/figures/fig_q1_2.svg", "paper/figures/fig_q1_2.png"],
   "target_width": "1.00 text width",
@@ -215,8 +227,11 @@ Write `paper/figures/figure_manifest.json` with one record per figure:
 Write `paper/figures/figure_qa_log.md` with correctness, automated QA, target-width inspection,
 repairs, and final status. Preserve `reports/DRAWIO_REPORT.md` for non-data diagrams.
 
-Hand off to `paper-section-writer` only when required paper figures are `PASS`. Route failures to
-the generating skill, upstream model/code owner, or modeler according to the failed contract.
+Hand off to `paper-section-writer` only when required paper figures are `PASS`, their editable
+sources exist, and no required figure has an `OPEN`/`BLOCKING` issue. Treat `PLACEHOLDER`,
+`AWAITING_SAVE`, and `UNVERIFIED_MCP_FALLBACK` as non-promotable. Route unresolved complex
+Draw.io failures to `using-drawio-mcp` through `4drawio`; route other failures to the generating
+skill, upstream model/code owner, or modeler according to the failed contract.
 
 ## Quick Reference
 
@@ -226,7 +241,8 @@ the generating skill, upstream model/code owner, or modeler according to the fai
 | Wrong values or missing source | Result/code owner; re-freeze if canonical values change |
 | Matplotlib capability gap | MATLAB MCP path |
 | Ordinary style weakness | Stay in Python and repair layout/style |
-| Exact workflow or model diagram | `4drawio` |
+| Exact workflow or model diagram | `4drawio`; use `using-drawio-mcp` when the complexity predicate is true |
+| Draw.io MCP failure or unresolved placeholder | `using-drawio-mcp`; keep G5/G6 blocked |
 | Non-numeric conceptual art | `draw-image` |
 | Font, overlap, clipping, legend obstruction | Repair and repeat visual QA |
 

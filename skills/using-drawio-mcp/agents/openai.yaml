@@ -1,0 +1,4 @@
+interface:
+  display_name: "Using Draw.io MCP"
+  short_description: "Standardize complex Draw.io MCP diagram workflows"
+  default_prompt: "Use $using-drawio-mcp to create and verify a complex editable modeling diagram through Draw.io MCP."

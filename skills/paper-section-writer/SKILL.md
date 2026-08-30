@@ -90,6 +90,19 @@ Three high-stakes framing claims are graded judgments — what a judge reads fir
 
 In the output JSON summary, add a `paper_seeds` field reporting, per seed, `present: true/false` and (for `why_this_method`) the `provenance_marker` transcribed. Any seed `present: false` (surviving sentinel) means the affected section is NOT "drafted".
 
+## G5.4 Figure readiness and placeholder handling
+
+Before citing a required figure, verify its record in `paper/figures/figure_manifest.json`, its
+target-width result in `paper/figures/figure_qa_log.md`, and any row in
+`paper/issues/issue_register.md`. Final section status requires the editable source and export to
+exist, `qa_status: PASS`, paper-language labels, and no `OPEN` or `BLOCKING` issue.
+
+A Mermaid or TikZ render may be inserted to preserve draft layout only when it is explicitly
+recorded as `PLACEHOLDER`. The states `PLACEHOLDER`, `AWAITING_SAVE`, and
+`UNVERIFIED_MCP_FALLBACK` make the affected section `blocked_on_figure`; they never count as a
+finished citation and cannot pass G5/G6. Route complex Draw.io recovery to `using-drawio-mcp`
+through `4drawio`.
+
 # Three Critical Rules (Enforced as Hard Gates)
 
 This skill MUST enforce these three rules. Violation of any rule means the skill must refuse to write final paper sections and redirect.
@@ -385,7 +398,7 @@ Before handing off, verify:
 - Every drafted section uses only available artifacts.
 - **Every numerical claim is sourced from `frozen_numbers.json`** (not raw results, not previous drafts).
 - Every figure or table reference maps to the figure-table plan or existing file.
-- Every figure referenced has passed `math-figure-generator`'s `render_check_and_log` (verify by checking `paper/figures/render_check.log`).
+- Every figure referenced has passed the applicable `modeling-figure-orchestrator` QA contract; required complex Draw.io figures also have a verified editable source and no unresolved issue.
 - Every robustness claim maps to a robustness artifact.
 - Every subquestion has a corresponding draft section or is marked incomplete.
 - Assumptions are connected to modeling needs.

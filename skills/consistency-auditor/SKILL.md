@@ -16,6 +16,7 @@ The audit covers five dimensions:
 3. **Symbols** — symbols used in `paper/sections/*.tex` and `methods/Qx/qx_final_method_explanation.md` must be defined in `planning/symbol_table.md`, with the same meaning everywhere.
 4. **Parameters** — parameter values written into the paper (e.g. K=30, α=0.05, seed=2026) must match the values actually used in `code/Qx/*.py` or `code/matlab/Qx/*.m`.
 5. **Decision provenance** — every judgment claim in the paper ("we chose X because…", confidence, verdict) must trace to a `DECIDED` record in `methods/Qx/qx_decision_log.md` via a `decision_id` marker. This is the decision-side analogue of the numbers check; it stops the AI from re-authoring the human's reasoning.
+6. **Requirement and estimator alignment** — hard data-use restrictions, requested outputs, estimator/loss functions, refitting rules, and test definitions must agree across problem parse, method explanation, code, results, and paper.
 
 This skill does NOT write the paper, fix the code, or regenerate results. It only reports divergences and routes them to the right repair skill.
 
@@ -132,6 +133,12 @@ Scan and read:
    - Also flag the reverse: a `DECIDED` method-choice record whose rationale appears **nowhere** in the paper (informational — the team's reasoning isn't being used).
    - Staleness: if a decision record is marked `STALE` by `completeness-auditor` (its underlying number changed), any paper sentence citing it is suspect → WARN.
 
+7.6. **Audit requirement and statistical-estimator alignment.**
+   - Compare `problem_requirement_traceability.md` with the paper and code. The trace row must include a verbatim problem excerpt and page number. Report as **BLOCKING** any “attachment-data-only” or requested-parameter constraint that is absent, bypassed by an external formula, or replaced by an unreported fixed value.
+   - Extract the estimator/loss function and refitting rule used by the main fit, Bootstrap, cross-validation, and hypothesis tests. Report as **BLOCKING** when the paper claims one procedure but code runs another, or when validation changes Huber/OLS, constrained/unconstrained fitting, or parameter re-estimation without a pre-decision record, comparison result, impact analysis, and boundary.
+   - For claimed algorithm branches or global search, verify an execution log, test coverage, or reproducible result evidence in addition to a function-name/path match; an uncalled stub does not satisfy consistency.
+   - Check that a parameter claimed as estimated has an identifiable data path; if it is absorbed into an amplitude/scale or only a parameter combination is identified, report `unidentifiable_parameter_claimed_as_estimated` as **BLOCKING** and route to `2analysis-modeling`.
+
 8. **Build the audit report.**
    Save to `paper/audits/cross_media_consistency_audit.md`. Structure:
    - Overall pass/fail.
@@ -144,7 +151,8 @@ Scan and read:
    - Paper number ≠ source number → `paper-section-writer` (paper needs update) OR `result-report-generator` (source is wrong) — pick based on which is the canonical truth.
    - Figure file missing → `math-figure-generator` (re-render) or `paper-section-writer` (remove/fix reference).
    - Symbol undefined → `symbol-table-builder` or `paper-section-writer`.
-   - Parameter drift → `python-code-reviewer` / `matlab-code-reviewer` to check the code is correct, then either update code or update paper.
+- Parameter drift → `python-code-reviewer` / `matlab-code-reviewer` to check the code is correct, then either update code or update paper.
+- Hard requirement or estimator mismatch → `2analysis-modeling`, `python-code-reviewer`, `matlab-code-reviewer`, or `robustness-checker` according to the source of the divergence.
 
 10. **Return control.**
     Hand audit result to `workflow-orchestrator`. Do not approve final assembly directly.
