@@ -169,6 +169,28 @@ SOURCES.md                  # Provenance and integration notes / 来源与整合
 4. Explicit stop conditions instead of invented data / 明确停止条件，不虚构数据。
 5. Fewer, denser, more informative figures / 更少、更密、更有信息量的图表。
 
+## Acknowledgments / 致谢
+
+MathModeling Skills_JJ is an integration and adaptation project. We gratefully acknowledge the
+open-source projects and authors whose work informed or is included in this plugin:
+
+MathModeling Skills_JJ 是一个整合与适配项目。感谢下列开源项目及作者为本插件提供的思路、资源或基础能力：
+
+- [jihe520/sci-box](https://github.com/jihe520/sci-box): scientific-figure templates and the
+  editable Draw.io diagram layouts, generators, and layout-checking approach used by this plugin.
+  The bundled Tabler Icons attribution and MIT license are retained with the integrated resources.
+- [jihe520/MathModelAgent](https://github.com/jihe520/MathModelAgent): mathematical-modeling
+  workflow skills and contest-oriented references.
+- [RealSeaberry/AutoMCM-Pro](https://github.com/RealSeaberry/AutoMCM-Pro): AutoMCM runtime and
+  modeling-agent workflow materials.
+- [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills):
+  research, paper-writing, and review foundations adapted for contest modeling.
+- [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp): editable Draw.io MCP integration.
+
+See [SOURCES.md](./SOURCES.md) for the full provenance record and integration notes.
+
+完整来源与整合说明见 [SOURCES.md](./SOURCES.md)。
+
 ## Contributing / 参与贡献
 
 Issues and pull requests are welcome, especially contest-template adaptations, tested solver
