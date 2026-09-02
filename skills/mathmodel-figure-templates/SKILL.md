@@ -6,7 +6,10 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob
 
 # MathModel Figure Templates
 
-This skill is bundled into the LaTeX sandbox at `/home/user/.claude/skills/mathmodel-figure-templates`. It contains ready-to-run Python/matplotlib scripts for the figure templates exposed in the MathModel Improve tab.
+This skill is bundled in the MathModeling Skills plugin and is compatible with the upstream
+`jihe520/sci-box` `scibox-figure` template set. The plugin keeps one canonical template skill so
+that routing, contest evidence rules, and readability edits are not split across duplicate skills.
+It contains ready-to-run Python/matplotlib scripts for advanced scientific figures.
 
 ## Fast Path
 
@@ -14,7 +17,7 @@ This skill is bundled into the LaTeX sandbox at `/home/user/.claude/skills/mathm
 2. From `/home/user/workspace`, run the renderer with the template id:
 
 ```bash
-python3 /home/user/.claude/skills/mathmodel-figure-templates/scripts/render_template.py paired-raincloud
+python3 skills/mathmodel-figure-templates/scripts/render_template.py paired-raincloud
 ```
 
 3. The renderer copies the bundled template script into `绘图复刻/scripts/`, runs it there, and writes outputs to `绘图复刻/outputs/`.
@@ -23,7 +26,7 @@ python3 /home/user/.claude/skills/mathmodel-figure-templates/scripts/render_temp
 Use `--list` to show supported ids:
 
 ```bash
-python3 /home/user/.claude/skills/mathmodel-figure-templates/scripts/render_template.py --list
+python3 skills/mathmodel-figure-templates/scripts/render_template.py --list
 ```
 
 ## Output Contract
@@ -34,6 +37,9 @@ python3 /home/user/.claude/skills/mathmodel-figure-templates/scripts/render_temp
 - Outputs: `绘图复刻/outputs/<template>_replica.png`, `.pdf`, `.svg`.
 - Use the bundled scripts as the first choice; edit the copied workspace script only when the user requests customization.
 - The bundled scripts use deterministic simulated data. Do not claim simulated values reproduce a source study exactly.
+- The upstream local installation remains available as `scibox-figure` for reference, but paper
+  figures must use this plugin's canonical copy so its font, resolution, evidence, and QA rules
+  stay aligned. Copy only a missing upstream pattern after checking for overlap.
 
 ## Template Ids
 

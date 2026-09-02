@@ -8,7 +8,10 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetc
 
 本 skill 承接 `3coding-visual`。它只负责论文中的**非数据型图示**，例如论文整体示意图、技术路线图、求解流程图、模型结构图、数据处理流程图、变量关系图、指标体系图等。整体布局参考 `sci-box/scibox-diagram` 的五带路线、三栏研究框架和横版任务流水线思路，但节点与结论必须来自当前题目。
 
-版式选择和连线约束详见 `references/scibox-integration.md`。
+版式选择和连线约束详见 `references/scibox-integration.md`。插件已内置
+`resources/scibox-diagram/`：其中包含来自 `jihe520/sci-box` 的四套可复现模板、Draw.io
+XML 生成脚本、预览/导出脚本、静态布局检查器及模板说明。优先复用这些资源，再按当前题目
+替换内容；不要把示例中的研究结论或模拟数据当作本题证据。
 
 ## 数学建模规范参考
 
@@ -127,6 +130,23 @@ When MCP is unavailable or still fails visual QA after three attempts, record:
 report them as final, and never allow them through G5 or G6.
 
 ### Step 3: 生成 DrawIO 源文件
+
+### sci-box 模板资源路径
+
+按版式选择后，从以下插件内路径读取对应说明、示例 JSON 和脚本：
+
+```text
+skills/4drawio/resources/scibox-diagram/
+  assets/<template-id>/example.json
+  references/<template-id>.md
+  scripts/<template-id>.py
+```
+
+四个模板脚本分别为 `roadmap_5band.py`、`framework_3col.py`、`stageflow_3col.py` 和
+`taskflow_land.py`。先复制并修改 `example.json`，再运行脚本生成 `.drawio`；生成后运行
+`scripts/check_layout.py`，需要浏览器预览时运行 `scripts/preview_html.py`。若需导出 PNG/PDF，
+运行 `scripts/export_figure.py` 并保留可编辑 `.drawio` 源文件。资源中的 Tabler 图标受 MIT
+许可保护，使用时保留 `resources/scibox-diagram/ATTRIBUTION.md` 及其许可证文件。
 
 每张图一个 `.drawio` 文件，放在 `figures/`。
 

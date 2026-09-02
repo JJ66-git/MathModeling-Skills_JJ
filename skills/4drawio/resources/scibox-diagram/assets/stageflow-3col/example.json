@@ -1,0 +1,55 @@
+{
+  "_comment": "占位示例：把 ____ 与 ①②③ 换成你的内容。rights 是右栏说明，可整段删除。",
+  "headers": ["研究框架", "研究内容", "研究方法"],
+  "stages": [
+    {"text": "方法一", "block": 0, "at": 0.42},
+    {"text": "方法二", "block": 1, "at": 0.45},
+    {"text": "方法三", "block": 2, "at": 0.45},
+    {"text": "方法四", "block": 3, "at": 0.45},
+    {"text": "方法五", "block": 4, "at": 0.55}
+  ],
+  "rights": [
+    {"text": "总体设计", "block": 0, "at": 0.45},
+    {"text": "阶段实施", "block": 1, "at": 0.5},
+    {"text": "数据实现", "block": 2, "at": 0.5},
+    {"text": "场景决策", "block": 3, "at": 0.45},
+    {"text": "成果转化", "block": 4, "at": 0.55}
+  ],
+  "blocks": [
+    {"title": "____ 整体框架", "tone": "teal", "sections": [
+      {"type": "cards", "cards": [
+        {"header": "维度 ①", "desc": "____ 综述、\n____ 梳理与\n概念界定"},
+        {"header": "维度 ②", "desc": "现状分析、\n问题提出与\n研究意义"},
+        {"header": "维度 ③", "desc": "关键问题、\n假设设定与\n技术难点"},
+        {"header": "维度 ④", "desc": "总体目标、\n分阶段目标\n与研究边界"},
+        {"header": "维度 ⑤", "desc": "____ 创新、\n方法创新与\n应用创新"}
+      ]}
+    ]},
+    {"title": "____ 阶段流程", "tone": "green", "sections": [
+      {"type": "groups", "groups": [
+        {"header": "阶段一", "items": ["环节 A1", "环节 A2", "环节 A3"]},
+        {"header": "阶段二", "items": ["环节 B1", "环节 B2", "环节 B3"]},
+        {"header": "阶段三", "items": ["环节 C1", "环节 C2", "环节 C3"]}
+      ]}
+    ]},
+    {"title": "____ 处理与分析流程", "tone": "olive", "sections": [
+      {"type": "list_grid",
+       "left": {"header": "预处理", "items": ["原始 ____", "特征 ____", "清洗 ____"]},
+       "right": {"header": "____ 训练与分析", "rows": [
+         ["步骤 1-1", "步骤 1-2", "步骤 1-3"],
+         ["步骤 2-1", "步骤 2-2", "步骤 2-3"],
+         ["步骤 3-1", "步骤 3-2", "步骤 3-3"]]}}
+    ]},
+    {"title": "多场景决策与执行流程", "tone": "orange", "sections": [
+      {"type": "scenarios", "scenarios": [
+        {"name": "场景 A", "left": "输入 ①", "decide": "决策 A", "right": "约束 ①", "out": "输出 A"},
+        {"name": "场景 B", "left": "输入 ②", "decide": "决策 B", "right": "约束 ②", "out": "输出 B"},
+        {"name": "场景 C", "left": "输入 ③", "decide": "决策 C", "right": "约束 ③", "out": "输出 C"}
+      ]}
+    ]},
+    {"title": "成果与应用方向", "tone": "blue", "sections": [
+      {"type": "fanout", "center": "核心 ____ 成果",
+       "outs": ["产出 ①", "产出 ②", "产出 ③", "产出 ④", "产出 ⑤"]}
+    ]}
+  ]
+}

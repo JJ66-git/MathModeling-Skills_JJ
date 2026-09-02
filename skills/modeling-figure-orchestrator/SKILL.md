@@ -15,6 +15,13 @@ This skill owns routing, coverage, manifests, and final visual QA. It does not r
 `figure-table-planner`, `math-figure-generator`, `4drawio`, `using-drawio-mcp`, `draw-image`, or
 `mathmodel-figure-templates`.
 
+The plugin integrates `jihe520/sci-box` as a resource source rather than a second competing
+figure workflow. Its four editable Draw.io layouts are bundled under
+`4drawio/resources/scibox-diagram/`; its scientific plotting templates are already carried by
+`mathmodel-figure-templates` with contest-specific readability edits (including the 7.5 pt
+Chinese sixth-size floor). Preserve those local edits and route to the bundled resources only when
+they add coverage or a clearer information architecture.
+
 ## Workflow Position
 
 Run after `figure-table-planner` has drafted the per-Qx figure plan. For Type 3/4 figures, require a
@@ -66,7 +73,7 @@ caption, and editable source path; one generic diagram must still not be relabel
 | Visual need | Primary route | Escalation or boundary |
 |---|---|---|
 | Data chart from model output | `math-figure-generator` with Python/matplotlib/pandas | For publication-targeted grouped bars, trends, heatmaps, radar plots, or multi-panel comparisons, optionally consult `math-figure-generator/references/figures4papers.md`; use MATLAB MCP only when capability or project-language criteria below apply |
-| Known advanced template | `mathmodel-figure-templates` | Replace simulated template data with verified project data before paper use |
+| Known advanced template | `mathmodel-figure-templates` (including the integrated sci-box template set) | Replace simulated template data with verified project data before paper use; do not create a duplicate template skill |
 | Exact logical flowchart or architecture | `4drawio` | Route complex or existing-file Draw.io work to `using-drawio-mcp`; prefer editable geometry and exact labels over generated pixels |
 | Conceptual illustration without numeric evidence | `draw-image` | Never use it for measured values, fitted curves, rankings, or uncertainty |
 | Figure plan or claim mapping | `figure-table-planner` | Return there if type or claim is unconfirmed |
@@ -133,8 +140,10 @@ request. Lock visible labels to the paper language: Chinese uses Chinese plus `æ
 uses English plus `Yes`/`No`. Use `draw-image` only for non-numeric conceptual illustration
 where exact text geometry is not load-bearing.
 
-For a paper overview, prefer a five-band roadmap, three-column framework, or landscape taskflow
-layout inspired by `sci-box/scibox-diagram`. Route every connector orthogonally or through an explicit
+For a paper overview, prefer the bundled `scibox-diagram` five-band roadmap, three-column
+framework/stage flow, or landscape taskflow layout when its information architecture fits. Read the
+matching reference under `4drawio/resources/scibox-diagram/references/`, adapt its example JSON,
+and keep the generated `.drawio` source alongside the export. Route every connector orthogonally or through an explicit
 shared bus, then run the route audit before aesthetic styling. For an important algorithm, keep any
 selected flowchart and mechanism diagram semantically distinct and cross-reference only the figures
 that were actually generated.
