@@ -56,9 +56,10 @@ comparison dimensions; do not retain multiple low-density figures merely because
 exist.
 
 For CUMCM/全国赛, add `paper_overview` (one global paper schematic) and
-`important_algorithm_pair` (a flowchart plus a concept/mechanism diagram for each important
-algorithm). The pair may share a Draw.io file with separate pages, but both roles, captions, and
-editable source paths must be recorded; one generic algorithm diagram does not satisfy the pair.
+`important_algorithm_diagram` for each important algorithm. Select `algorithm_flow`,
+`algorithm_mechanism`, or both by the explanation load: use flow for steps/decisions, mechanism for
+variables/feedback, and both only when each adds non-redundant evidence. Record the selected role,
+caption, and editable source path; one generic diagram must still not be relabeled as two roles.
 
 ### 2. Route each visual
 
@@ -134,8 +135,9 @@ where exact text geometry is not load-bearing.
 
 For a paper overview, prefer a five-band roadmap, three-column framework, or landscape taskflow
 layout inspired by `sci-box/scibox-diagram`. Route every connector orthogonally or through an explicit
-shared bus, then run the route audit before aesthetic styling. For an important algorithm, keep the
-flowchart and mechanism diagram semantically distinct and cross-reference them in the paper.
+shared bus, then run the route audit before aesthetic styling. For an important algorithm, keep any
+selected flowchart and mechanism diagram semantically distinct and cross-reference only the figures
+that were actually generated.
 
 ### 5. Verify numerical and logical correctness
 
@@ -188,7 +190,7 @@ Type 3/4 promotion requires all of these:
 
 - no text below the documented font floor;
 - no text below Chinese sixth-size, 7.5 pt, after final paper scaling;
-- no required paper-overview or algorithm-pair slot is missing;
+- no required paper-overview or selected algorithm-diagram slot is missing;
 - no text-text, text-legend, label-axis, or panel overlap;
 - no clipping or content outside the canvas;
 - axis labels, units, ticks, and legends are readable at target width;
