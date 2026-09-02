@@ -55,6 +55,11 @@ sensitivity/robustness analysis, and decision-scheme visualization. Every row is
 comparison dimensions; do not retain multiple low-density figures merely because they already
 exist.
 
+For CUMCM/全国赛, add `paper_overview` (one global paper schematic) and
+`important_algorithm_pair` (a flowchart plus a concept/mechanism diagram for each important
+algorithm). The pair may share a Draw.io file with separate pages, but both roles, captions, and
+editable source paths must be recorded; one generic algorithm diagram does not satisfy the pair.
+
 ### 2. Route each visual
 
 | Visual need | Primary route | Escalation or boundary |
@@ -127,6 +132,11 @@ request. Lock visible labels to the paper language: Chinese uses Chinese plus `�
 uses English plus `Yes`/`No`. Use `draw-image` only for non-numeric conceptual illustration
 where exact text geometry is not load-bearing.
 
+For a paper overview, prefer a five-band roadmap, three-column framework, or landscape taskflow
+layout inspired by `sci-box/scibox-diagram`. Route every connector orthogonally or through an explicit
+shared bus, then run the route audit before aesthetic styling. For an important algorithm, keep the
+flowchart and mechanism diagram semantically distinct and cross-reference them in the paper.
+
 ### 5. Verify numerical and logical correctness
 
 For every data figure:
@@ -146,6 +156,8 @@ For every flowchart:
 - verify decisions have complete labeled exits;
 - verify arrows do not imply a dependency absent from the model;
 - keep terminology consistent with the symbol table and paper.
+- check that branches, merges, feedback loops, and lane boundaries are unambiguous and that no
+  connector crosses a node or another connector without an explicit bridge convention.
 
 ### 6. Apply human-crafted differentiation
 
@@ -176,6 +188,7 @@ Type 3/4 promotion requires all of these:
 
 - no text below the documented font floor;
 - no text below Chinese sixth-size, 7.5 pt, after final paper scaling;
+- no required paper-overview or algorithm-pair slot is missing;
 - no text-text, text-legend, label-axis, or panel overlap;
 - no clipping or content outside the canvas;
 - axis labels, units, ticks, and legends are readable at target width;
@@ -220,7 +233,9 @@ Write `paper/figures/figure_manifest.json` with one record per figure:
     "baseline": "present"
   },
   "qa_status": "PASS",
-  "paper_section": "Results Analysis"
+  "paper_section": "Results Analysis",
+  "diagram_role": "paper_overview|algorithm_flow|algorithm_mechanism|other",
+  "paired_diagram_id": null
 }
 ```
 

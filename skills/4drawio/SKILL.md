@@ -6,7 +6,9 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetc
 
 # DrawIO 非数据图示绘制
 
-本 skill 承接 `3coding-visual`。它只负责论文中的**非数据型图示**，例如技术路线图、求解流程图、模型结构图、数据处理流程图、变量关系图、指标体系图等。
+本 skill 承接 `3coding-visual`。它只负责论文中的**非数据型图示**，例如论文整体示意图、技术路线图、求解流程图、模型结构图、数据处理流程图、变量关系图、指标体系图等。整体布局参考 `sci-box/scibox-diagram` 的五带路线、三栏研究框架和横版任务流水线思路，但节点与结论必须来自当前题目。
+
+版式选择和连线约束详见 `references/scibox-integration.md`。
 
 ## 数学建模规范参考
 
@@ -34,6 +36,8 @@ reports/DRAWIO_REPORT.md
 
 如果某类图不需要生成，必须在 `reports/DRAWIO_REPORT.md` 中说明原因。竞赛论文通常至少需要一张 `fig_roadmap` 技术路线图。
 
+全国赛论文必须生成一张论文整体示意图（可与 `fig_roadmap` 合并，但用途和 caption 要明确），将题目、数据、各问题、模型/算法、验证和最终决策串成可追溯的信息流。
+
 读取这些文件的目的不是提取数据作图，而是理解论文方法、章节结构、子问题关系和已有图表，避免重复。
 
 ## 工作流程
@@ -47,6 +51,7 @@ reports/DRAWIO_REPORT.md
 ```text
 DRAWIO PLAN CHECKLIST:
 [ ] fig_roadmap      技术路线图，放在问题重述/绪论
+[ ] fig_paper_overview 论文整体示意图，放在问题重述/总体方法
 [ ] fig_flow_q1      问题一求解流程图
 [ ] fig_flow_q2      问题二求解流程图
 [ ] fig_flow_q3      问题三求解流程图
@@ -68,6 +73,7 @@ DRAWIO PLAN CHECKLIST:
 | 模型结构图 | `fig_model` | 展示模块关系、变量关系、模型层次 |
 | 指标体系图 | `fig_index_system` | 展示目标层、准则层、指标层 |
 | 决策树/规则图 | `fig_decision_tree` | 展示分类规则、设备选择、策略分支 |
+| 论文整体示意图 | `fig_paper_overview` | 展示题目—数据—逐题模型—验证—决策的全局信息流 |
 
 不要用 DrawIO 画这些图：
 
@@ -88,6 +94,17 @@ edit, or an explicit Draw.io MCP requirement.
 Match all visible labels to the paper language. Chinese figures use Chinese labels and `是`/`否`;
 English figures use English labels and `Yes`/`No`. For existing files, require the page-safe
 `list_pages -> get_page -> set_page` workflow owned by `using-drawio-mcp`.
+
+If `drawio` is absent from `codex mcp list`, restore the official stdio service before drawing:
+
+```powershell
+codex mcp add drawio -- "<npx-path>" --yes @drawio/mcp
+codex mcp get drawio
+```
+
+Do not silently replace a required editable diagram with a bitmap. If installation or startup
+fails, record the fallback state and keep the figure non-promotable until MCP is restored or a
+human accepts the documented fallback.
 
 When MCP is unavailable or still fails visual QA after three attempts, record:
 
@@ -110,6 +127,9 @@ DrawIO 内容要求：
 - 节点文字短，必要时双行，不堆长句。
 - 同类节点样式统一。
 - 箭头方向清晰，避免交叉。
+- 先排版后连线：固定列基线和层级，优先正交折线、共享母线和分区泳道；禁止无语义的斜穿线、回头线和节点重叠。
+- 整体示意图优先使用五带路线图、三栏研究框架或横版任务流水线；不为“好看”增加无论证节点。
+- 重要算法必须同时提供算法流程框图和算法概念/机制图；流程图表达步骤与判断，概念图表达变量、模块、反馈和作用机理，不能用同一张只改标题的图替代。
 - 图中不写大段解释，解释留给论文正文。
 - 不使用装饰性阴影和过度渐变。
 
@@ -155,6 +175,8 @@ fi
 - 若导出成功，`.pdf` 文件非空。
 - 节点没有明显重叠。
 - 箭头不穿过核心节点。
+- 多分支、多汇流和反馈均有明确入口/出口，连线不交叉、不重叠；必要时改用母线、泳道或分层页面。
+- 论文整体示意图覆盖题目、数据、每个子问题、模型/算法、验证和决策；重要算法的流程图与概念图成对存在。
 - 字号、颜色、边框风格一致。
 - 文件名和图意一致。
 - 没有与 `3coding-visual` 的数据图重复。
@@ -187,3 +209,4 @@ fi
 - 每张图必须能对应到`reports/ANALYSIS_MODELING_REPORT.md` 中的真实方法。
 - 数据型图表不得在本阶段重复生成。
 - 论文阶段引用的非数据图都应有 `.drawio` 源文件和 PDF，或者在 `reports/DRAWIO_REPORT.md` 说明导出失败。
+- 导出前检查目标版面下最小字号不低于中文六号（约 7.5 pt）；矢量优先，位图分辨率须足以保证缩印清晰，不把 300 dpi 当作唯一合格线。

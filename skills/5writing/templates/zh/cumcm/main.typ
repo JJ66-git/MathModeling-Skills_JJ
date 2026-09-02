@@ -64,27 +64,6 @@
   keywords-cn(keywords)
   pagebreak()
 }
-#let toc-page() = {
-  show outline.entry.where(level: 1): it => link(
-    it.element.location(),
-    block(above: 7pt)[
-      #text(font: hei-font, size: 12pt, weight: "bold")[
-        #grid(
-          columns: (auto, 1fr, auto),
-          column-gutter: 0.5em,
-          [#it.prefix()#it.body()],
-          [#repeat[.]],
-          [#it.page()],
-        )
-      ]
-    ],
-  )
-  outline(
-    title: align(center)[#text(font: hei-font, size: 17.3pt, weight: "bold")[目录]],
-    depth: 3,
-  )
-  pagebreak()
-}
 #let references-cn() = [
 #heading(numbering: none, outlined: true)[参考文献]
 #{ set par(first-line-indent: 0pt, spacing: 0.35em); include("references.typ") }
@@ -130,8 +109,6 @@
 ][
   [关键词1] #h(1em) [关键词2] #h(1em) [关键词3]
 ]
-
-#toc-page()
 
 #include("sections/1_restatement.typ")
 #include("sections/2_analysis.typ")
